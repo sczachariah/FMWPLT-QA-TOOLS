@@ -1,0 +1,61 @@
+# The container definition we want to use for developing our app
+
+box: oraclelinux:7.3
+
+build:
+  steps:
+
+   - script:
+      name: Setting up the workspace to copy JAVA dependency to a "/u01/installs/java" directory
+      code: |
+      echo `pwd`
+      mkdir /u01/installs/java
+      cd /u01/installs/java
+
+   - script:
+      name: install java package
+      code: |
+       wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+           $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
+               awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
+               grep -o 'http.*\.tar\.gz'\
+           )
+       echo `pwd`
+#
+#   - script:
+#      name: install dependencies
+#      code: |
+#       set GOROOT=/usr/local/go
+#       set GOPATH=$HOME/go
+#       set GOBIN=$GOPATH/bin
+#       set PATH=$GOPATH:$GOBIN:$PATH
+#
+#       cd $WERCKER_SOURCE_DIR
+#       make vendor
+#
+#   - script:
+#      name: build and stage the project
+#      code: |
+#       make docker-stage
+#       ls -ltr
+#       cp -r docker-stage/. $WERCKER_OUTPUT_DIR/
+#       cp -r wercker/. $WERCKER_OUTPUT_DIR/
+#
+#
+#push-release:
+#  box: oraclelinux:7.3
+#  steps:
+#   - script:
+#      name: copy distribution
+#      code: |
+#       mkdir -p /u01/oracle
+#       cp -r $WERCKER_SOURCE_DIR/. /u01/oracle/
+#
+#   - internal/docker-push:
+#      name: Push the third party dependency containing image to repository
+#      username: $DOCKER_USERNAME
+#      password: $DOCKER_PASSWORD
+#      repository: docker.io/vpriyankaprabhu/thirdpartydependencystdimage
+#      tag: $WERCKER_GIT_COMMIT
+#      working-dir: /u01/installs/
+#      registry: https://docker.io
