@@ -39,11 +39,9 @@ build:
       name: Extract the jdk*.tar.gz and jre*.tar.gz files to /u01/installs directory
       code: |
        cd /u01/installs
-       JDK_TAR_FILENAME=`ls jdk*.tar.gz`
-       JRE_TAR_FILENAME=`ls jre*.tar.gz`
-       tar zxvf $JDK_TAR_FILENAME
-       tar zxvf $JRE_TAR_FILENAME
-       echo ""; ls -ltr /u01/installs/
+       tar zxf `ls jdk*.tar.gz` --directory /u01/installs/jdk
+       tar zxf `ls jre*.tar.gz` --directory /u01/installs/jre
+       echo ""; ls -ltd */
 #
 #   - script:
 #      name: install dependencies
