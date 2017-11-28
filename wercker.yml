@@ -2,7 +2,7 @@
 
 box: oraclelinux:7.4
 
-java-dependency-build:
+java:
   steps:
 
    - script:
@@ -22,10 +22,11 @@ java-dependency-build:
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
            $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
-               grep -o 'http\*.*8u152*\.tar\.gz'\
+               grep -o 'http.*\.tar\.gz'\
            )
        echo `pwd`
        ls -ltr *
+       ls -ltr |grep *8u152*
        cd /u01/installs/
 #
 #   - script:
