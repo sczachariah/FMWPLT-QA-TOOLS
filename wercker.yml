@@ -38,7 +38,6 @@ build:
        mkdir -p /u01/installs/jdk; mv `ls -d jdk*` /u01/installs/jdk
        mkdir -p /u01/installs/jre; mv `ls -d jre*` /u01/installs/jre
        echo ""; ls -ltr jdk
-       export
 #
 #   - script:
 #      name: install dependencies
