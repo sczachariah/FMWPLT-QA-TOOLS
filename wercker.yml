@@ -2,13 +2,16 @@
 
 box: oraclelinux:7.4
 
-java-dependency-build:
+build:
   steps:
 
-   - script:
+  - script:
      name: Downloading & Installing "wget" package
      code: |
       sudo yum install wget -y
+
+java-dependency-build:
+  steps:
 
    - script:
       name: Create "/u01/installs/java" directory to store all third party dependencies
@@ -24,9 +27,12 @@ java-dependency-build:
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
            $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
-               grep -o 'http.*\.tar\.gz' | tail -n 1\
+               grep -o 'http.*\.tar\.gz' | tail -n 1 \
            )
-       echo ""; ls -ltr | grep *8u152*
+       echo ""; ls -ltr *
+       echo ""; echo `ls | tail -n 1`
+       chmod 777 `ls | tail -n 1`
+       echo ""; ls -ltr *
        cd /u01/installs/
 #
 #   - script:
