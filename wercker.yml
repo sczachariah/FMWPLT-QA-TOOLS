@@ -2,7 +2,7 @@
 
 box: oraclelinux:7.4
 
-java-dependency-build:
+build:
   steps:
 
    - script:
@@ -11,14 +11,14 @@ java-dependency-build:
       sudo yum install wget -y
 
    - script:
-      name: Create "/u01/installs/java" directory to store all third party dependencies
+      name: Create "/u01/installs" directory to store all third party dependencies
       code: |
-       mkdir -p /u01/installs/java
+       mkdir -p /u01/installs
 
    - script:
-      name: Download & Copy JAVA dependency to a "/u01/installs/java" directory
+      name: Download & Copy JAVA dependency to a "/u01/installs" directory
       code: |
-       cd /u01/installs/java
+       cd /u01/installs
        echo ""; echo "Current working directory is :" `pwd`
        echo ""
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
@@ -36,16 +36,14 @@ java-dependency-build:
        echo ""; ls -ltr *
 
    - script:
-      name: Extract the jdk*.tar.gz and jre*.tar.gz files to /u01/installs/java directory
+      name: Extract the jdk*.tar.gz and jre*.tar.gz files to /u01/installs directory
       code: |
-       cd /u01/installs/java
-       mkdir -p /u01/installs/java/jdk
-       mkdir -p /u01/installs/java/jre
+       cd /u01/installs
        JDK_TAR_FILENAME=`ls jdk*.tar.gz`
        JRE_TAR_FILENAME=`ls jre*.tar.gz`
-       tar zxvf $JDK_TAR_FILENAME -C /u01/installs/java/jdk
-       tar zxvf $JRE_TAR_FILENAME -C /u01/installs/java/jre
-       echo ""; ls -ltr /u01/installs/java/
+       tar zxvf $JDK_TAR_FILENAME
+       tar zxvf $JRE_TAR_FILENAME
+       echo ""; ls -ltr /u01/installs/
 #
 #   - script:
 #      name: install dependencies
