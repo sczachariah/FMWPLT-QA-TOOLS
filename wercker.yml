@@ -11,10 +11,12 @@ build:
        echo `pwd`
        mkdir -p /u01/installs/java
        cd /u01/installs/java
+       echo `pwd`
 
    - script:
       name: install java package
       code: |
+       which wget
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
            $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
