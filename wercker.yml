@@ -6,9 +6,9 @@ build:
   steps:
 
    - script:
-     name: Installing wget package
+     name: Downloading and Installing wget package
      code: |
-      sudo yum install wget
+      sudo yum install wget -y
 
    - script:
       name: Setting up the workspace to copy JAVA dependency to a "/u01/installs/java" directory
