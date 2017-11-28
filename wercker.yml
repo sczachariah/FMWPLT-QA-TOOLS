@@ -2,7 +2,7 @@
 
 box: oraclelinux:7.4
 
-build:
+java-dependency-build:
   steps:
 
    - script:
