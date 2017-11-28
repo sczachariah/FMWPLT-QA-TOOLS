@@ -41,8 +41,8 @@ java-dependency-build:
        cd /u01/installs/java
        mkdir -p /u01/installs/java/jdk
        mkdir -p /u01/installs/java/jre
-       tar zxvf `ls jdk*.tar.gz` /u01/installs/java/jdk
-       tar zxvf `ls jre*.tar.gz` /u01/installs/java/jre
+       tar zxvf `ls jdk*.tar.gz` -C /u01/installs/java/jdk
+       tar zxvf `ls jre*.tar.gz` -C /u01/installs/java/jre
        echo ""; ls -ltr /u01/installs/java/jdk
        echo ""; ls -ltr /u01/installs/java/jre
 #
