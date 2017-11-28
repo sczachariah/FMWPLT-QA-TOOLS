@@ -26,9 +26,13 @@ java-dependency-build:
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
                grep -o 'http.*\.tar\.gz' | tail -n 1 \
            )
-       echo ""; ls -ltr *
-       echo ""; echo `ls | tail -n 1`
-       chmod 777 `ls | tail -n 1`
+       wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+           $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html | \
+               awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
+               grep -o 'http.*\.tar\.gz' | tail -n 1 \
+           )
+
+       chmod 777 `ls | tail -n 2`
        echo ""; ls -ltr *
        cd /u01/installs/
 #
