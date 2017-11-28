@@ -32,8 +32,8 @@ build:
                grep -o 'http.*\.tar\.gz' | tail -n 1 \
            )
        chmod 777 `ls | tail -n 2`
-       tar zxf `ls jdk*.tar.gz`; mv jdk1.8.0_152 jdk
-       tar zxf `ls jre*.tar.gz`; mv jre1.8.0_152 jre
+       tar zxf `ls jdk*.tar.gz`; mv `tar tzf jdk*.tar.gz | head -1 | cut -f1 -d"/"` jdk; chmod 777 -R jdk
+       tar zxf `ls jre*.tar.gz`; mv `tar tzf jre*.tar.gz | head -1 | cut -f1 -d"/"` jre; chmod 777 -R jre
        echo ""; ls -ltr *
 #
 #   - script:
