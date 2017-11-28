@@ -13,18 +13,16 @@ build:
    - script:
       name: Create "/u01/installs/java" directory to store all third party dependencies
       code: |
-       echo `pwd`
        mkdir -p /u01/installs/java
-       cd /u01/installs/java
-       echo `pwd`
 
    - script:
       name: Download & Copy JAVA dependency to a "/u01/installs/java" directory
       code: |
+       cd /u01/installs/java
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
            $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
-               grep -o 'http.*\.tar\.gz'\
+               grep -o 'http.*8u152*\.tar\.gz'\
            )
        echo `pwd`
        ls -ltr *
