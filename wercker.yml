@@ -17,7 +17,6 @@ build:
        mkdir -p /u01/installs/java
        cd /u01/installs/java
        echo `pwd`
-       ls -ltr *
 
    - script:
       name: Download & Copy JAVA dependency to a "/u01/installs/java" directory
