@@ -43,7 +43,7 @@ build:
        mkdir -p /u01/installs/jre
        tar zxf `ls jdk*.tar.gz` --directory /u01/installs/jdk
        tar zxf `ls jre*.tar.gz` --directory /u01/installs/jre
-       echo ""; ls -ltd */
+       echo ""; ls -ltr /u01/installs/jdk
 #
 #   - script:
 #      name: install dependencies
