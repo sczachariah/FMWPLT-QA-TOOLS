@@ -31,12 +31,9 @@ build:
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
                grep -o 'http.*\.tar\.gz' | tail -n 1 \
            )
-
        chmod 777 `ls | tail -n 2`
-       tar zxf `ls jdk*.tar.gz`
-       tar zxf `ls jre*.tar.gz`
-       mkdir -p /u01/installs/jdk; mv `ls -d jdk*` /u01/installs/jdk
-       mkdir -p /u01/installs/jre; mv `ls -d jre*` /u01/installs/jre
+       tar zxf `ls jdk*.tar.gz`; mv jdk1.8.0_152 jdk
+       tar zxf `ls jre*.tar.gz`; mv jre1.8.0_152 jre
        echo ""; ls -ltr *
 #
 #   - script:
