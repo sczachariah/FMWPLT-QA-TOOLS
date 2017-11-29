@@ -58,17 +58,18 @@ build:
    - script:
       name: Download & Install GIT dependency to "/u01/installs" directory
       code: |
-       mkdir -p /u01/installs/git
-       cd /u01/installs/git;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       git clone --config core.autocrlf=false --config http.sslverify=false https://github.com/git/git.git
-       ls -ltr *
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       wget http://kernel.org/pub/software/scm/git/git-2.15.1.tar.gz
+       tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
+       make configure
        ./configure --prefix=/usr
-       make all
-       sudo make install
+       make all doc info
+       sudo make install install-doc install-html install-info
        echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
        sudo ln -s /u01/installs/git/bin/git /usr/bin/git
        source /etc/bashrc
-       git --version
+       git --version; echo ""
+       git clone git://git.kernel.org/pub/scm/git/git.git
 
 #   - script:
 #      name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
