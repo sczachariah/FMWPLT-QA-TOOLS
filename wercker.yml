@@ -64,9 +64,8 @@ build:
        echo"" ; ls -ltr /u01/installs/git; echo ""
        export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
        export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
-       make configure
-       ./configure --prefix=/u01/installs
-       make install
+       ./configure
+       make && make install
        git --version; echo ""
        git config --list; echo ""
 
