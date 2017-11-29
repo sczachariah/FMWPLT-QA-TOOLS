@@ -31,26 +31,32 @@ build:
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
                grep -o 'http.*\.tar\.gz' | tail -n 1 \
            )
-       chmod 777 `ls | tail -n 2`
        tar zxf `ls jdk*.tar.gz`; mv `tar tzf jdk*.tar.gz | head -1 | cut -f1 -d"/"` jdk; chmod 777 -R jdk
        tar zxf `ls jre*.tar.gz`; mv `tar tzf jre*.tar.gz | head -1 | cut -f1 -d"/"` jre; chmod 777 -R jre
-       echo ""; ls -ltr *
-       export JAVA_HOME=/u01/installs/jdk
-       export JRE_HOME=/u01/installs/jre
-       export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-       echo "";echo $PATH
+
+   - script:
+      name: Setting up JAVA Environment variables to PATH Environment varaiables and testing with command java -version
+       export JAVA_HOME = /u01/installs/jdk; echo ""; echo $JAVA_HOME
+       export JRE_HOME  = /u01/installs/jre; echo ""; echo $JRE_HOME
+       export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin; echo ""; echo $PATH
        echo ""; java -version
-#
-#   - script:
-#      name: install dependencies
-#      code: |
-#       set GOROOT=/usr/local/go
-#       set GOPATH=$HOME/go
-#       set GOBIN=$GOPATH/bin
-#       set PATH=$GOPATH:$GOBIN:$PATH
-#
-#       cd $WERCKER_SOURCE_DIR
-#       make vendor
+
+   - script:
+      name: Download & Install ANT dependency to a "/u01/installs" directory
+      code: |
+       cd /u01/installs
+       echo ""; echo "Current working directory is :" `pwd`
+       echo ""
+       wget http://mirror.candidhosting.com/pub/apache//ant/binaries/apache-ant-1.10.1-bin.tar.gz
+       tar zxf apache-ant-1.10.1-bin.tar.gz;
+       mv `tar tzf apache*.tar.gz | head -1 | cut -f1 -d"/"` ant; chmod 777 -R ant
+
+   - script:
+      name: Setting up ANT Environment variables to PATH Environment varaiables and testing with command ant -version
+       export ANT_HOME = /u01/installs/ant; echo ""; echo $ANT_HOME
+       export PATH=$PATH:$ANT_HOME/bin; echo ""; echo $PATH
+       echo ""; ant -version
+
 #
 #   - script:
 #      name: build and stage the project
