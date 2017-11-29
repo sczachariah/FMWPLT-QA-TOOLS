@@ -108,8 +108,8 @@ build:
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget https://services.gradle.org/distributions/gradle-3.1-bin.zip
        unzip -q gradle-3.1-bin.zip;   mv gradle-3.1 gradle;   chmod 777 -R gradle
-       export GRADLE_HOME=/u01/installs/ant;   echo "GRADLE_HOME  : "   $GRADLE_HOME
-       export PATH=$PATH:$GRADLE_HOME/bin;     echo "PATH         : "   $PATH;    echo ""
+       export GRADLE_HOME=/u01/installs/gradle;   echo "GRADLE_HOME  : "   $GRADLE_HOME
+       export PATH=$PATH:$GRADLE_HOME/bin;        echo "PATH         : "   $PATH;    echo ""
        gradle -v
 
    - script:
