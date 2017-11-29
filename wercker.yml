@@ -52,11 +52,21 @@ build:
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://www.trieuvan.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
        tar zxf `ls apache-maven*.tar.gz`;   mv `tar tzf apache-maven*.tar.gz | head -1 | cut -f1 -d"/"` maven;  chmod 777 -R maven
-       export M2_HOME=/u01/installs/maven;  echo "M2_HOME  : "   $M2_HOME
-       export M2=/u01/installs/maven/bin;   echo "M2       : "   $M2
+       export M2_HOME=/u01/installs/maven;  echo "M2_HOME       : "   $M2_HOME
+       export M2=/u01/installs/maven/bin;   echo "M2            : "   $M2
        export MAVEN_OPTS="-Xms256m -Xmx512m"; echo "MAVEN_OPTS  : "   $MAVEN_OPTS
-       export PATH=$PATH:$M2;               echo "PATH     : "   $PATH;     echo ""
+       export PATH=$PATH:$M2;               echo "PATH          : "   $PATH;     echo ""
        mvn -version
+
+   - script:
+      name: Download & Install GIT dependency to "/u01/installs" directory
+      code: |
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       wget wget http://kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
+       tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git
+       export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
+       export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
+       git --version;   git config --list
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
