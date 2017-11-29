@@ -61,13 +61,12 @@ build:
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
-       tar zxJf `ls Python*.tar.xz`;   mv `tar tzf Python*.tar.xz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
+       tar xJf `ls Python*.tar.xz`;   mv `tar tzf Python*.tar.xz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
        cd /u01/installs/python
        ./configure
        make && make install
        export PATH=$PATH:/u01/install/python;  echo "PATH         : "   $PATH;     echo ""
-       python3 -V
-       exit()
+       python --version
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
