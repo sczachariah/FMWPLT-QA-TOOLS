@@ -59,7 +59,7 @@ build:
    - script:
       name: Download & Install GIT dependency to "/u01/installs" directory
       code: |
-       yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils
+       yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils -y
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://kernel.org/pub/software/scm/git/git-2.14.1.tar.gz
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
