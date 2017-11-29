@@ -8,6 +8,7 @@ build:
    - script:
      name: Installing "wget", "gcc" package for downloading dependencies
      code: |
+      sudo yum groups install "Development Tools"
       sudo yum install wget -y
       sudo yum install gcc -y
       mkdir -p /u01/installs
