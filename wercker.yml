@@ -78,7 +78,7 @@ build:
        ./configure --prefix=/u01/installs/git
        make;  make install
        echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
-       sudo ln -s /u01/installs/git/bin/git /usr/bin/git
+       sudo ln -fs /u01/installs/git/bin/git /usr/bin/git
        source /etc/bashrc
        echo""; ls -ltr /u01/installs/git/bin/; echo ""
        git --version
