@@ -11,49 +11,49 @@ build:
       sudo yum groups install "Development Tools" -y
       sudo yum install wget -y
       mkdir -p /u01/installs
-
-   - script:
-      name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
-      code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-           $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
-               awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
-               grep -o 'http.*\.tar\.gz' | tail -n 1 \
-           )
-       wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-           $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html | \
-               awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
-               grep -o 'http.*\.tar\.gz' | tail -n 1 \
-           )
-       tar zxf `ls jdk*.tar.gz`;  mv `tar tzf jdk*.tar.gz | head -1 | cut -f1 -d"/"` jdk;   chmod 777 -R jdk
-       tar zxf `ls jre*.tar.gz`;  mv `tar tzf jre*.tar.gz | head -1 | cut -f1 -d"/"` jre;   chmod 777 -R jre
-       export JAVA_HOME=/u01/installs/jdk;              echo "JAVA_HOME :"  $JAVA_HOME
-       export JRE_HOME=/u01/installs/jre;               echo "JRE_HOME  :"  $JRE_HOME
-       export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin;  echo "PATH      :"  $PATH;   echo ""
-       java -version
-
-   - script:
-      name: Download & Install ANT dependency to "/u01/installs" directory
-      code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz
-       tar zxf `ls apache*.tar.gz`;   mv `tar tzf apache*.tar.gz | head -1 | cut -f1 -d"/"` ant;  chmod 777 -R ant
-       export ANT_HOME=/u01/installs/ant;   echo "ANT_HOME  : "   $ANT_HOME
-       export PATH=$PATH:$ANT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
-       ant -version
-
-   - script:
-      name: Download & Install MAVEN dependency to "/u01/installs" directory
-      code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget http://www.trieuvan.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-       tar zxf `ls apache-maven*.tar.gz`;   mv `tar tzf apache-maven*.tar.gz | head -1 | cut -f1 -d"/"` maven;  chmod 777 -R maven
-       export M2_HOME=/u01/installs/maven;    echo "M2_HOME      : "   $M2_HOME
-       export M2=/u01/installs/maven/bin;     echo "M2           : "   $M2
-       export MAVEN_OPTS="-Xms256m -Xmx512m"; echo "MAVEN_OPTS   : "   $MAVEN_OPTS
-       export PATH=$PATH:$M2;                 echo "PATH         : "   $PATH;     echo ""
-       mvn -version
+#
+#   - script:
+#      name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
+#      code: |
+#       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+#       wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+#           $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
+#               awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
+#               grep -o 'http.*\.tar\.gz' | tail -n 1 \
+#           )
+#       wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+#           $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html | \
+#               awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
+#               grep -o 'http.*\.tar\.gz' | tail -n 1 \
+#           )
+#       tar zxf `ls jdk*.tar.gz`;  mv `tar tzf jdk*.tar.gz | head -1 | cut -f1 -d"/"` jdk;   chmod 777 -R jdk
+#       tar zxf `ls jre*.tar.gz`;  mv `tar tzf jre*.tar.gz | head -1 | cut -f1 -d"/"` jre;   chmod 777 -R jre
+#       export JAVA_HOME=/u01/installs/jdk;              echo "JAVA_HOME :"  $JAVA_HOME
+#       export JRE_HOME=/u01/installs/jre;               echo "JRE_HOME  :"  $JRE_HOME
+#       export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin;  echo "PATH      :"  $PATH;   echo ""
+#       java -version
+#
+#   - script:
+#      name: Download & Install ANT dependency to "/u01/installs" directory
+#      code: |
+#       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+#       wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz
+#       tar zxf `ls apache*.tar.gz`;   mv `tar tzf apache*.tar.gz | head -1 | cut -f1 -d"/"` ant;  chmod 777 -R ant
+#       export ANT_HOME=/u01/installs/ant;   echo "ANT_HOME  : "   $ANT_HOME
+#       export PATH=$PATH:$ANT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
+#       ant -version
+#
+#   - script:
+#      name: Download & Install MAVEN dependency to "/u01/installs" directory
+#      code: |
+#       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+#       wget http://www.trieuvan.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+#       tar zxf `ls apache-maven*.tar.gz`;   mv `tar tzf apache-maven*.tar.gz | head -1 | cut -f1 -d"/"` maven;  chmod 777 -R maven
+#       export M2_HOME=/u01/installs/maven;    echo "M2_HOME      : "   $M2_HOME
+#       export M2=/u01/installs/maven/bin;     echo "M2           : "   $M2
+#       export MAVEN_OPTS="-Xms256m -Xmx512m"; echo "MAVEN_OPTS   : "   $MAVEN_OPTS
+#       export PATH=$PATH:$M2;                 echo "PATH         : "   $PATH;     echo ""
+#       mvn -version
 
    - script:
       name: Download & Install GIT dependency to "/u01/installs" directory
@@ -61,10 +61,13 @@ build:
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
-       ./configure
-       make && make install
+       make configure
+       ./configure --prefix=/usr
+       make all doc info
+       sudo make install install-doc install-html install-info
+       sudo make install install-doc install-html install-info
        git --version; echo ""
-       git clone git@github.com:vpriyankaprabhu/SimpleCalculator.git
+       git clone git://git.kernel.org/pub/scm/git/git.git
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
