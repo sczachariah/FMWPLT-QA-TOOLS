@@ -89,8 +89,8 @@ build:
        cd /u01/installs/junit;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
        chmod 777 -R junit-4.12.jar
-       export JUNIT_HOME=/u01/installs/junit;     echo "JUNIT_HOME  : "   $JUNIT_HOME
-       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar
+       export JUNIT_HOME=/u01/installs/junit;                  echo "JUNIT_HOME  : "   $JUNIT_HOME
+       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar; echo "CLASSPATH   : "   $CLASSPATH
 
    - script:
       name: Download & Install TESTNG dependency to "/u01/installs" directory
@@ -99,15 +99,25 @@ build:
        cd /u01/installs/testng;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://repo1.maven.org/maven2/org/testng/testng/6.8.5/testng-6.8.5.jar
        chmod 777 -R testng-6.8.5.jar
-       export TESTNG_HOME=/u01/installs/testng;     echo "TESTNG_HOME  : "   $TESTNG_HOME
-       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar; echo "TESTNG_HOME  : "   $TESTNG_HOME
+       export TESTNG_HOME=/u01/installs/testng;                   echo "TESTNG_HOME   : "   $TESTNG_HOME
+       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar; echo "CLASSPATH     : "   $CLASSPATH
+
+   - script:
+      name: Download & Install GRADLE dependency to "/u01/installs" directory
+      code: |
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       wget https://services.gradle.org/distributions/gradle-3.1-bin.zip
+       unzip -q gradle-3.1-bin.zip;   mv gradle-3.1 gradle;   chmod 777 -R gradle
+       export GRADLE_HOME=/u01/installs/ant;   echo "GRADLE_HOME  : "   $GRADLE_HOME
+       export PATH=$PATH:$GRADLE_HOME/bin;     echo "PATH         : "   $PATH;    echo ""
+       gradle -v
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        mkdir -p /u01/installs/downloads
-       mv *.t*z /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
+       mv *.t*z /u01/installs/downloads; mv gradle*zip /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
        cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
        cd $WERCKER_OUTPUT_DIR;
