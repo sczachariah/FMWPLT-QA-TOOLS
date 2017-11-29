@@ -125,6 +125,7 @@ build:
 
 push-thirdparty-dependencies-image:
   steps:
+
    - internal/docker-push:
       name: Push the third party dependency containing image to repository
       username: $DOCKER_USERNAME
