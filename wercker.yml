@@ -90,7 +90,7 @@ build:
        wget http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
        chmod 777 -R junit-4.12.jar
        export JUNIT_HOME=/u01/installs/junit;                  echo "JUNIT_HOME  : "   $JUNIT_HOME
-       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar; echo "CLASSPATH   : "   $CLASSPATH
+       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar;
 
    - script:
       name: Download & Install TESTNG dependency to "/u01/installs" directory
@@ -100,7 +100,7 @@ build:
        wget http://repo1.maven.org/maven2/org/testng/testng/6.8.5/testng-6.8.5.jar
        chmod 777 -R testng-6.8.5.jar
        export TESTNG_HOME=/u01/installs/testng;                   echo "TESTNG_HOME   : "   $TESTNG_HOME
-       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar; echo "CLASSPATH     : "   $CLASSPATH
+       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar;
 
    - script:
       name: Download & Install GRADLE dependency to "/u01/installs" directory
@@ -113,18 +113,25 @@ build:
        gradle -v
 
    - script:
+      name: Download & Install GROOVY dependency to "/u01/installs" directory
+      code: |
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       wget  https://bintray.com/artifact/download/groovy/maven/apache-groovy-binary-2.4.8.zip
+       unzip -q apache-groovy-binary-2.4.8.zip;   mv apache-groovy-binary-2.4.8 groovy;   chmod 777 -R groovy
+       export GROOVY_HOME=/u01/installs/groovy;   echo "GROOVY_HOME  : "   $GROOVY_HOME
+       export PATH=$PATH:$GROOVY_HOME/bin;        echo "PATH         : "   $PATH;    echo ""
+       groovy -version
+
+   - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        mkdir -p /u01/installs/downloads
-       mv *.t*z /u01/installs/downloads; mv gradle*zip /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
+       mv *.t*z /u01/installs/downloads;  mv *.zip /u01/installs/downloads;
+       cp /u01/installs/junit/junit*.jar /u01/installs/downloads; cp /u01/installs/testng/testng*.jar /u01/installs/downloads
+       chmod 777 -R /u01/installs/downloads
        cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
-       cd $WERCKER_OUTPUT_DIR;
-       echo ""; ls -ltr *; echo ""
-
-push-thirdparty-dependencies-image:
-  steps:
 
    - internal/docker-push:
       name: Push the third party dependency containing image to repository
