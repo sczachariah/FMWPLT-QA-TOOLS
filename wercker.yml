@@ -65,7 +65,6 @@ build:
        ./configure --prefix=/usr
        make all doc info
        sudo make install install-doc install-html install-info
-       sudo make install install-doc install-html install-info
        git --version; echo ""
        git clone git://git.kernel.org/pub/scm/git/git.git
 
