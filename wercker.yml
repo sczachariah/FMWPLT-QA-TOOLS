@@ -29,7 +29,7 @@ build:
        tar zxf `ls jre*.tar.gz`;  mv `tar tzf jre*.tar.gz | head -1 | cut -f1 -d"/"` jre;   chmod 777 -R jre
        export JAVA_HOME=/u01/installs/jdk;  echo "JAVA_HOME :"  $JAVA_HOME
        export JRE_HOME=/u01/installs/jre;   echo "JRE_HOME  :"  $JRE_HOME
-       export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin;  echo "PATH      : "   $PATH;   echo ""
+       export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin;  echo "PATH      : "  $PATH;   echo ""
        java -version
 
    - script:
@@ -62,9 +62,11 @@ build:
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git
        export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
        export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
-       echo""; ls -ltr git; echo ""
-#       git --version; echo ""
-#       git config --list; echo ""
+       make configure
+       ./configure --prefix=/u01/installs
+       make install
+       git --version; echo ""
+       git config --list; echo ""
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
@@ -74,7 +76,6 @@ build:
        mv *.tar.gz /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
        cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
-       cd $WERCKER_OUTPUT_DIR;  echo "";  ls -ltr *;  echo ""
 
 #push-thirdparty-dependencies-image:
 #  steps:
