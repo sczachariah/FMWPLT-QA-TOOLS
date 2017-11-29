@@ -9,7 +9,6 @@ build:
      name: Installing "wget" package for downloading dependencies
      code: |
       sudo yum install wget -y
-    #Create "/u01/installs" directory to store all third party dependencies
       mkdir -p /u01/installs
 
    - script:
