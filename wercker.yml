@@ -16,7 +16,7 @@ build:
        mkdir -p /u01/installs
 
    - script:
-      name: Download & Install JAVA, JRE dependency to a "/u01/installs" directory
+      name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
       code: |
        cd /u01/installs
        echo ""; echo "Current working directory is :" `pwd`; echo ""
@@ -38,7 +38,7 @@ build:
        java -version
 
    - script:
-      name: Download & Install ANT dependency to a "/u01/installs" directory
+      name: Download & Install ANT dependency to "/u01/installs" directory
       code: |
        cd /u01/installs
        echo ""; echo "Current working directory is :" `pwd`; echo ""
@@ -49,7 +49,7 @@ build:
        ant -version
 
    - script:
-      name: Download & Install MAVEN dependency to a "/u01/installs" directory
+      name: Download & Install MAVEN dependency to "/u01/installs" directory
       code: |
        cd /u01/installs
        echo ""; echo "Current working directory is :" `pwd`; echo ""
@@ -58,16 +58,16 @@ build:
        export M2_HOME=/u01/installs/maven;  echo "M2_HOME  : "   $M2_HOME
        export PATH=$PATH:$M2_HOME/bin;      echo "PATH     : "   $PATH;     echo ""
        mvn -version
-#
-#   - script:
-#      name: build and stage the project
-#      code: |
-#       make docker-stage
-#       ls -ltr
-#       cp -r docker-stage/. $WERCKER_OUTPUT_DIR/
-#       cp -r wercker/. $WERCKER_OUTPUT_DIR/
-#
-#
+
+   - script:
+      name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
+      code: |
+       mkdir -p /u01/installs/downloads
+       mv *.tar.gz /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
+       echo ""; ls -ltr *; echo ""
+       cp -r /u01/installs/ $WERCKER_SOURCE_DIR/
+       cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
+
 #push-release:
 #  box: oraclelinux:7.3
 #  steps:
