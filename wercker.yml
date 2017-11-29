@@ -37,8 +37,8 @@ build:
    - script:
       name: Setting up JAVA Environment variables to PATH Environment varaiables and testing with command java -version
       code: |
-       export JAVA_HOME = /u01/installs/jdk; echo ""; echo $JAVA_HOME
-       export JRE_HOME  = /u01/installs/jre; echo ""; echo $JRE_HOME
+       export JAVA_HOME=/u01/installs/jdk; echo ""; echo $JAVA_HOME
+       export JRE_HOME=/u01/installs/jre; echo ""; echo $JRE_HOME
        export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin; echo ""; echo $PATH
        echo ""; java -version
 
@@ -48,14 +48,14 @@ build:
        cd /u01/installs
        echo ""; echo "Current working directory is :" `pwd`
        echo ""
-       wget http://mirror.candidhosting.com/pub/apache//ant/binaries/apache-ant-1.10.1-bin.tar.gz
-       tar zxf apache-ant-1.10.1-bin.tar.gz;
+       wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz
+       tar zxf `ls apache*.tar.gz`;
        mv `tar tzf apache*.tar.gz | head -1 | cut -f1 -d"/"` ant; chmod 777 -R ant
 
    - script:
       name: Setting up ANT Environment variables to PATH Environment varaiables and testing with command ant -version
       code : |
-       export ANT_HOME = /u01/installs/ant; echo ""; echo $ANT_HOME
+       export ANT_HOME=/u01/installs/ant; echo ""; echo $ANT_HOME
        export PATH=$PATH:$ANT_HOME/bin; echo ""; echo $PATH
        echo ""; ant -version
 
