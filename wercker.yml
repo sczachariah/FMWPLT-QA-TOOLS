@@ -56,18 +56,18 @@ build:
        export PATH=$PATH:$M2;                 echo "PATH         : "   $PATH;     echo ""
        mvn -version
 
-  - script:
-     name: Download & Install PYTHON dependency to "/u01/installs" directory
-     code: |
-      cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-      wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
-      tar zxf `ls Python*.tar.gz`;   mv `tar tzf Python*.tar.gz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
-      cd /u01/installs/python
-      ./configure
-      make && make install
-      export PATH=$PATH:/u01/install/python;  echo "PATH         : "   $PATH;     echo ""
-      python3 -V
-      exit()
+   - script:
+      name: Download & Install PYTHON dependency to "/u01/installs" directory
+      code: |
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
+       tar zxf `ls Python*.tar.gz`;   mv `tar tzf Python*.tar.gz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
+       cd /u01/installs/python
+       ./configure
+       make && make install
+       export PATH=$PATH:/u01/install/python;  echo "PATH         : "   $PATH;     echo ""
+       python3 -V
+       exit()
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
