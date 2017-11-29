@@ -18,8 +18,7 @@ build:
    - script:
       name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
       code: |
-       cd /u01/installs
-       echo ""; echo "Current working directory is :" `pwd`; echo ""
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
            $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
@@ -40,8 +39,7 @@ build:
    - script:
       name: Download & Install ANT dependency to "/u01/installs" directory
       code: |
-       cd /u01/installs
-       echo ""; echo "Current working directory is :" `pwd`; echo ""
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz
        tar zxf `ls apache*.tar.gz`;   mv `tar tzf apache*.tar.gz | head -1 | cut -f1 -d"/"` ant;  chmod 777 -R ant
        export ANT_HOME=/u01/installs/ant;   echo "ANT_HOME  : "   $ANT_HOME
@@ -51,26 +49,24 @@ build:
    - script:
       name: Download & Install MAVEN dependency to "/u01/installs" directory
       code: |
-       cd /u01/installs
-       echo ""; echo "Current working directory is :" `pwd`; echo ""
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://www.trieuvan.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
        tar zxf `ls apache-maven*.tar.gz`;   mv `tar tzf apache-maven*.tar.gz | head -1 | cut -f1 -d"/"` maven;  chmod 777 -R maven
        export M2_HOME=/u01/installs/maven;  echo "M2_HOME  : "   $M2_HOME
-       export PATH=$PATH:$M2_HOME/bin;      echo "PATH     : "   $PATH;     echo ""
+       export M2=/u01/installs/maven/bin;   echo "M2       : "   $M2
+       export MAVEN_OPTS="-Xms256m -Xmx512m"; echo "MAVEN_OPTS  : "   $MAVEN_OPTS
+       export PATH=$PATH:$M2;               echo "PATH     : "   $PATH;     echo ""
        mvn -version
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
       code: |
-       cd /u01/installs
-       echo ""; echo "Current working directory is :" `pwd`; echo ""
+       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        mkdir -p /u01/installs/downloads
        mv *.tar.gz /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
-       echo ""; ls -ltr *; echo ""
-       cp -r /u01/installs/ $WERCKER_SOURCE_DIR/
+       cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
-       cd $WERCKER_SOURCE_DIR
-       echo ""; ls -ltr *; echo ""
+       cd $WERCKER_OUTPUT_DIR;  echo "";  ls -ltr *;  echo ""
 
 #push-release:
 #  box: oraclelinux:7.3
