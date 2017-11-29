@@ -60,15 +60,16 @@ build:
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        git clone --config core.autocrlf=false --config http.sslverify=false https://github.com/git/git.git
-       ls -ltr /u01/oracle/git; cd /u01/oracle/git
-       make configure
-       ./configure --prefix=/usr
-       make all doc
-       make install install-doc install-html
-       echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
-       sudo ln -s /u01/installs/git/bin/git /usr/bin/git
-       source /etc/bashrc
-       git --version
+       ls -ltr *
+#       ls -ltr /u01/oracle/git; cd /u01/oracle/git
+#       make configure
+#       ./configure --prefix=/usr
+#       make all doc
+#       make install install-doc install-html
+#       echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
+#       sudo ln -s /u01/installs/git/bin/git /usr/bin/git
+#       source /etc/bashrc
+#       git --version
 
 #   - script:
 #      name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
