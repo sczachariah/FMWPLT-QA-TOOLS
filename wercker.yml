@@ -127,7 +127,8 @@ build:
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
        sha256sum `ls go*.tar.gz`
-       tar zxf `ls go*.tar.gz`;   mv `tar tzf go*.tar.gz | head -1 | cut -f1 -d"/"` go;  chmod 777 -R go
+       tar zxf `ls go*.tar.gz`;  chmod 777 -R go
+       ls -ltr /u01/installs/go
        export GOPATH=/u01/installs/go;    echo "GOPATH      : "   $GOPATH
        export GOBIN=$GOPATH/bin;          echo "GOBIN       : "   $GOBIN
        export PATH=$PATH:$GOPATH:$GOBIN;  echo "PATH        : "   $PATH;     echo ""
