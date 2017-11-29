@@ -62,22 +62,21 @@ build:
        wget http://kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
        make configure
-       ./configure --prefix=/usr
        make all doc info
        sudo make install install-doc install-html install-info
        git --version; echo ""
        git clone git://git.kernel.org/pub/scm/git/git.git
 
-   - script:
-      name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
-      code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       mkdir -p /u01/installs/downloads
-       mv *.tar.gz /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
-       cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
-       cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
-       cd $WERCKER_OUTPUT_DIR;
-       echo ""; ls -ltr *; echo ""
+#   - script:
+#      name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
+#      code: |
+#       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+#       mkdir -p /u01/installs/downloads
+#       mv *.tar.gz /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
+#       cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
+#       cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
+#       cd $WERCKER_OUTPUT_DIR;
+#       echo ""; ls -ltr *; echo ""
 
 #push-thirdparty-dependencies-image:
 #  steps:
