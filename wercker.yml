@@ -63,9 +63,10 @@ build:
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://kernel.org/pub/software/scm/git/git-2.14.1.tar.gz
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
-       make prefix=/usr/local/git all
-       make prefix=/usr/local/git install
-       echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
+       ls -ltr *
+       make prefix=/u01/installs/git all
+       make prefix=/u01/installs/git install
+       echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
        source /etc/bashrc
        git --version; echo ""
 #       git clone https://github.com/git/git
