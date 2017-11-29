@@ -80,7 +80,6 @@ build:
        echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
        sudo ln -fs /u01/installs/git/bin/git /usr/bin/git
        source /etc/bashrc
-       echo""; ls -ltr /u01/installs/git/bin/; echo ""
        git --version
 
    - script:
@@ -88,7 +87,7 @@ build:
       code: |
        mkdir /u01/installs/junit
        cd /u01/installs/junit;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       git clone https://github.com/junit-team/junit.git
+       git clone git@github.com:junit-team/junit4.git
        sudo mvn install
        echo ""; ls -ltr *; echo ""
        export JUNIT_HOME=/u01/installs/junit;     echo "JUNIT_HOME  : "   $JUNIT_HOME
