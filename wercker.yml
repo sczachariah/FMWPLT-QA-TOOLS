@@ -63,10 +63,8 @@ build:
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
        ./configure
        make && make install
-       echo ""; ls -ltr *; echo ""
        git --version; echo ""
        git clone git@github.com:vpriyankaprabhu/SimpleCalculator.git
-       echo ""; ls -ltr *; echo ""
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
