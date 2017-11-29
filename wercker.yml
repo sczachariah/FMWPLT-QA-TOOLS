@@ -16,7 +16,7 @@ build:
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://ftp.gnu.org/pub/gnu/make/make-4.2.tar.gz
-       tar zxf `ls make*.tar.gz`;   mv `tar tzf make*.tar.gz | head -1 | cut -f1 -d"/"` make;  chmod 777 -R make; cd /u01/installs/make
+       tar zxf `ls make*.tar.gz`;   mv `tar tzf make*.tar.gz | head -1 | cut -f1 -d"/"` make;  chmod 777 -R make;   cd /u01/installs/make
        export MAKE_HOME=/u01/installs/make; echo "MAKE_HOME  : "   $MAKE_HOME
        export PATH=$PATH:$MAKE_HOME/bin;    echo "PATH       : "   $PATH;    echo ""
        ./configure
@@ -71,7 +71,8 @@ build:
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
-       tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git
+       tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
+       echo"" ; ls -ltr /u01/installs/git; echo ""
        export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
        export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
        make configure
