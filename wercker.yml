@@ -10,6 +10,7 @@ build:
      code: |
       sudo yum groups install "Development Tools" -y
       sudo yum install gcc perl-ExtUtils-MakeMaker -y
+      sudo yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel -y
       sudo yum install wget -y
       mkdir -p /u01/installs
 
@@ -63,8 +64,9 @@ build:
        wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
        tar zxf `ls Python*.tgz`;   mv `tar tzf Python*.tgz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
        cd /u01/installs/python
-       ./configure
-       make && make install
+       ./configure --prefix=/u01/installs/python
+       make
+       make install
        export PATH=$PATH:/u01/install/python;  echo "PATH         : "   $PATH;     echo ""
        python --version
 
