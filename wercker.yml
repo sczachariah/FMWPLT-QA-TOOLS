@@ -8,22 +8,9 @@ build:
    - script:
      name: Installing "wget", "gcc" package for downloading dependencies
      code: |
-      sudo yum groups install "Development Tools"
+      sudo yum groups install "Development Tools" -y
       sudo yum install wget -y
-      sudo yum install gcc -y
       mkdir -p /u01/installs
-
-   - script:
-      name: Download & Install MAKE dependency to "/u01/installs" directory
-      code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget http://ftp.gnu.org/pub/gnu/make/make-4.2.tar.gz
-       tar zxf `ls make*.tar.gz`;   mv `tar tzf make*.tar.gz | head -1 | cut -f1 -d"/"` make;  chmod 777 -R make;   cd /u01/installs/make
-       export MAKE_HOME=/u01/installs/make; echo "MAKE_HOME  : "   $MAKE_HOME
-       export PATH=$PATH:$MAKE_HOME/bin;    echo "PATH       : "   $PATH;    echo ""
-       ./configure
-       make
-       sudo make install
 
    - script:
       name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
