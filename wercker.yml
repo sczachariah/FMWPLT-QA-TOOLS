@@ -61,6 +61,7 @@ build:
        mkdir -p /u01/installs/git
        cd /u01/installs/git;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        git clone --config core.autocrlf=false --config http.sslverify=false https://github.com/git/git.git
+       ls -ltr *
        ./configure --prefix=/usr
        make all
        sudo make install
