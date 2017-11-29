@@ -77,7 +77,7 @@ build:
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
        ./configure --prefix=/u01/installs/git
        make;  make install
-       export PATH=$PATH:/u01/install/git;  echo "PATH         : "   $PATH;     echo ""
+       export PATH=$PATH:/u01/install/git/bin;  echo "PATH         : "   $PATH;     echo ""
        git --version
 
    - script:
