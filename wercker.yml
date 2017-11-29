@@ -59,10 +59,12 @@ build:
       name: Download & Install GIT dependency to "/u01/installs" directory
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget http://kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
-       tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
-       sudo make prefix=/u01/installs/git all
-       sudo make prefix=/u01/installs/git install
+       git clone --config core.autocrlf=false --config http.sslverify=false https://github.com/git/git.git
+       ls -ltr /u01/oracle/git; cd /u01/oracle/git
+       make configure
+       ./configure --prefix=/usr
+       make all doc
+       make install install-doc install-html
        echo "export PATH=$PATH:/u01/installs/git/bin" >> /etc/bashrc
        sudo ln -s /u01/installs/git/bin/git /usr/bin/git
        source /etc/bashrc
