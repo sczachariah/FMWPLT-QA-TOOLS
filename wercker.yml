@@ -87,11 +87,20 @@ build:
       code: |
        mkdir /u01/installs/junit
        cd /u01/installs/junit;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       git clone git@github.com:junit-team/junit4.git
-       sudo mvn install
-       echo ""; ls -ltr *; echo ""
+       wget http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
+       chmod 777 -R junit-4.12.jar
        export JUNIT_HOME=/u01/installs/junit;     echo "JUNIT_HOME  : "   $JUNIT_HOME
-#       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar
+       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar
+
+   - script:
+      name: Download & Install TESTNG dependency to "/u01/installs" directory
+      code: |
+       mkdir /u01/installs/testng
+       cd /u01/installs/testng;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       wget http://repo1.maven.org/maven2/org/testng/testng/6.8.5/testng-6.8.5.jar
+       chmod 777 -R testng-6.8.5.jar
+       export TESTNG_HOME=/u01/installs/junit;     echo "TESTNG_HOME  : "   $TESTNG_HOME
+       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
