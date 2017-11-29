@@ -6,14 +6,11 @@ build:
   steps:
 
    - script:
-     name: Downloading & Installing "wget" package
+     name: Installing "wget" package for downloading dependencies
      code: |
       sudo yum install wget -y
-
-   - script:
-      name: Create "/u01/installs" directory to store all third party dependencies
-      code: |
-       mkdir -p /u01/installs
+    #Create "/u01/installs" directory to store all third party dependencies
+      mkdir -p /u01/installs
 
    - script:
       name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
@@ -66,7 +63,8 @@ build:
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git
        export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
        export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
-       git --version;   git config --list
+       git --version; echo ""
+       git config --list; echo ""
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
