@@ -99,8 +99,8 @@ build:
        cd /u01/installs/testng;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://repo1.maven.org/maven2/org/testng/testng/6.8.5/testng-6.8.5.jar
        chmod 777 -R testng-6.8.5.jar
-       export TESTNG_HOME=/u01/installs/junit;     echo "TESTNG_HOME  : "   $TESTNG_HOME
-       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar
+       export TESTNG_HOME=/u01/installs/testng;     echo "TESTNG_HOME  : "   $TESTNG_HOME
+       export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar; echo "TESTNG_HOME  : "   $TESTNG_HOME
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
@@ -113,13 +113,13 @@ build:
        cd $WERCKER_OUTPUT_DIR;
        echo ""; ls -ltr *; echo ""
 
-#push-thirdparty-dependencies-image:
-#  steps:
-#   - internal/docker-push:
-#      name: Push the third party dependency containing image to repository
-#      username: $DOCKER_USERNAME
-#      password: $DOCKER_PASSWORD
-#      repository: docker.io/vpriyankaprabhu/thirdpartydependenciesimage
-#      tag: $WERCKER_GIT_COMMIT
-#      working-dir: /u01/installs/
-#      registry: https://docker.io
+push-thirdparty-dependencies-image:
+  steps:
+   - internal/docker-push:
+      name: Push the third party dependency containing image to repository
+      username: $DOCKER_USERNAME
+      password: $DOCKER_PASSWORD
+      repository: docker.io/vpriyankaprabhu/qa-tools
+      tag: $WERCKER_GIT_COMMIT
+      working-dir: /u01/installs/
+      registry: https://docker.io
