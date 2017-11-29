@@ -129,7 +129,8 @@ build:
        sha256sum `ls go*.tar.gz`
        tar zxf `ls go*.tar.gz`;  chmod 777 -R go
        ls -ltr /u01/installs/go
-       export GOPATH=/u01/installs/go;    echo "GOPATH      : "   $GOPATH
+       export GOROOT=/u01/installs        echo "GOROOT      : "   $GOROOT
+       export GOPATH=$GOROOT/go;          echo "GOPATH      : "   $GOPATH
        export GOBIN=$GOPATH/bin;          echo "GOBIN       : "   $GOBIN
        export PATH=$PATH:$GOPATH:$GOBIN;  echo "PATH        : "   $PATH;     echo ""
        go version;  go env
