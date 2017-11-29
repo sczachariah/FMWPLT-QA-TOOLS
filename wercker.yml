@@ -16,8 +16,7 @@ build:
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://ftp.gnu.org/pub/gnu/make/make-4.2.tar.gz
-       tar zxf `ls make*.tar.gz`;   mv `tar tzf make*.tar.gz | head -1 | cut -f1 -d"/"` make;  chmod 777 -R make
-       ls -ltr make;
+       tar zxf `ls make*.tar.gz`;   mv `tar tzf make*.tar.gz | head -1 | cut -f1 -d"/"` make;  chmod 777 -R make; cd /u01/installs/make
        export MAKE_HOME=/u01/installs/make; echo "MAKE_HOME  : "   $MAKE_HOME
        export PATH=$PATH:$MAKE_HOME/bin;    echo "PATH       : "   $PATH;    echo ""
        ./configure
