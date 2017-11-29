@@ -60,8 +60,8 @@ build:
       name: Download & Install PYTHON dependency to "/u01/installs" directory
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
-       tar xJf `ls Python*.tar.xz`;   mv `tar tzf Python*.tar.xz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
+       wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+       tar zxf `ls Python*.tgz`;   mv `tar tzf Python*.tgz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
        cd /u01/installs/python
        ./configure
        make && make install
@@ -73,7 +73,7 @@ build:
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        mkdir -p /u01/installs/downloads
-       mv *.tar.*z /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
+       mv *.t*z /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
        cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
        cd $WERCKER_OUTPUT_DIR;
