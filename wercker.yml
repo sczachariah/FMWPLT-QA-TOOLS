@@ -6,9 +6,10 @@ build:
   steps:
 
    - script:
-     name: Installing "wget" package for downloading dependencies
+     name: Installing "wget", "gcc" package for downloading dependencies
      code: |
       sudo yum install wget -y
+      sudo yum install gcc -y
       mkdir -p /u01/installs
 
    - script:
