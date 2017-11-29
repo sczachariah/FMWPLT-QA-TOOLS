@@ -119,7 +119,7 @@ push-thirdparty-dependencies-image:
       name: Push the third party dependency containing image to repository
       username: $DOCKER_USERNAME
       password: $DOCKER_PASSWORD
-      repository: docker.io/vpriyankaprabhu/qa-tools
+      repository: docker.io/fmwplt/qa-tools
       tag: $WERCKER_GIT_COMMIT
       working-dir: /u01/installs/
       registry: https://docker.io
