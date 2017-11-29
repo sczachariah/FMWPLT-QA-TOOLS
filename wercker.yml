@@ -84,6 +84,17 @@ build:
        git --version
 
    - script:
+      name: Download & Install JUNIT dependency to "/u01/installs" directory
+      code: |
+       mkdir /u01/installs/junit
+       cd /u01/installs/junit;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       git clone https://github.com/junit-team/junit.git
+       sudo mvn install
+       echo ""; ls -ltr *; echo ""
+       export JUNIT_HOME=/u01/installs/junit;     echo "JUNIT_HOME  : "   $JUNIT_HOME
+#       export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar
+
+   - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
