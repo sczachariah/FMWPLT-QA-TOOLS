@@ -9,8 +9,7 @@ build:
      name: Install Required Packages for downloading dependencies
      code: |
       sudo yum groups install "Development Tools" -y
-      sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
-      sudo yum install  gcc perl-ExtUtils-MakeMaker -y
+      sudo yum install gcc perl-ExtUtils-MakeMaker -y
       sudo yum install wget -y
       mkdir -p /u01/installs
 #
@@ -60,8 +59,6 @@ build:
    - script:
       name: Download & Install GIT dependency to "/u01/installs" directory
       code: |
-       mkdir -p /u01/installs/git
-       cd /u01/installs/git;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        git clone https://github.com/git/git
        git --version; echo ""
 #
