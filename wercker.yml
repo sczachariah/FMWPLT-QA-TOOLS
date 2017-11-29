@@ -63,8 +63,9 @@ build:
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git
        export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
        export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
-       git --version; echo ""
-       git config --list; echo ""
+       echo""; ls -ltr git; echo ""
+#       git --version; echo ""
+#       git config --list; echo ""
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
