@@ -6,7 +6,7 @@ build:
   steps:
 
    - script:
-     name: Installing "wget", "gcc" package for downloading dependencies
+     name: Installing "wget", "Development Tools" package for downloading dependencies
      code: |
       sudo yum groups install "Development Tools" -y
       sudo yum install wget -y
@@ -61,13 +61,14 @@ build:
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
        tar zxf `ls git*.tar.gz`;   mv `tar tzf git*.tar.gz | head -1 | cut -f1 -d"/"` git;  chmod 777 -R git;   cd /u01/installs/git
-       echo"" ; ls -ltr /u01/installs/git; echo ""
-       export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
-       export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
+#       export GIT_HOME=/u01/installs/git;   echo "GIT_HOME  : "   $GIT_HOME
+#       export PATH=$PATH:$GIT_HOME/bin;     echo "PATH      : "   $PATH;    echo ""
        ./configure
        make && make install
+       echo ""; ls -ltr *; echo ""
        git --version; echo ""
-       git config --list; echo ""
+       git clone git@github.com:vpriyankaprabhu/SimpleCalculator.git
+       echo ""; ls -ltr *; echo ""
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
@@ -77,6 +78,8 @@ build:
        mv *.tar.gz /u01/installs/downloads; chmod 777 -R /u01/installs/downloads
        cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
+       cd $WERCKER_OUTPUT_DIR;
+       echo ""; ls -ltr *; echo ""
 
 #push-thirdparty-dependencies-image:
 #  steps:
