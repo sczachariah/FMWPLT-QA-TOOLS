@@ -135,6 +135,9 @@ build:
        cp /u01/installs/junit/junit*.jar /u01/installs/downloads; cp /u01/installs/testng/testng*.jar /u01/installs/downloads
        chmod 777 -R /u01/installs/downloads
 
+       cp -r $WERCKER_SOURCE_DIR/setuptools.sh /u01/installs/
+       chmod -R 777 /u01/installs/setuptools.sh
+
        cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
 

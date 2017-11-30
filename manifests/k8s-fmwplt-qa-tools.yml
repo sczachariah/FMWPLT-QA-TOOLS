@@ -1,0 +1,24 @@
+---
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: qatools
+  labels:
+    app: qatools
+spec:
+  volumes:
+    - name: pv-qatools
+      persistentVolumeClaim:
+       claimName: pvc01
+  containers:
+    - name: qatools
+      imagePullPolicy: IfNotPresent
+      image: quay.io/fmwplt/fmwplt-qa-tools:
+      command: ["source"]
+      args: ["/u01/installs/setuptools.sh"]
+      volumeMounts:
+      - mountPath: "/u01/installs/"
+        name: pv-qatools
+---
+---
