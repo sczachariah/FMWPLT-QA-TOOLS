@@ -14,7 +14,7 @@ spec:
   containers:
     - name: qatools
       imagePullPolicy: IfNotPresent
-      image: quay.io/fmwplt/fmwplt-qa-tools:
+      image: quay.io/fmwplt/fmwplt-qa-tools:171130
       command: ["source"]
       args: ["/u01/installs/setuptools.sh"]
       volumeMounts:
