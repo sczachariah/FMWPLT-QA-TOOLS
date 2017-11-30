@@ -8,8 +8,9 @@ build:
      code: |
       sudo yum groups install "Development Tools" -y
       sudo yum install gcc perl-ExtUtils-MakeMaker -y
-      sudo yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel -y
+      echo "sudo yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel -y"
       sudo yum install wget -y
+      sudo yum clean all
       mkdir -p /u01/installs
       mkdir -p /u01/installs/downloads
 
@@ -48,7 +49,7 @@ build:
       name: Download & Install MAVEN dependency to "/u01/installs" directory
       code: |
        cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget http://www.trieuvan.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+       curl -O https://www.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
        tar zxf `ls apache-maven*.tar.gz`;   mv `tar tzf apache-maven*.tar.gz | head -1 | cut -f1 -d"/"` maven;  chmod 777 -R maven
        export M2_HOME=/u01/installs/maven;    echo "M2_HOME      : "   $M2_HOME
        export M2=/u01/installs/maven/bin;     echo "M2           : "   $M2
