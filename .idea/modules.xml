@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FMWPLT-QA-TOOLS.iml" filepath="$PROJECT_DIR$/FMWPLT-QA-TOOLS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fmwplt-qa-tools.iml" filepath="$PROJECT_DIR$/fmwplt-qa-tools.iml" />
     </modules>
   </component>
 </project>
