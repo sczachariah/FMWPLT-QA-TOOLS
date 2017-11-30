@@ -148,6 +148,6 @@ build:
       username: $QUAY_IO_USERNAME
       password: $QUAY_IO_PASSWORD
       repository: quay.io/fmwplt/fmwplt-qa-tools
-      tag: $WERCKER_BUILDVERSION
+      tag: $WERCKER_BUILDVERSION, latest
       working-dir: /u01/installs/
       registry: https://quay.io
