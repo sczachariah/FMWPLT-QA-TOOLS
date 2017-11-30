@@ -119,13 +119,12 @@ build:
        wget https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
        sha256sum `ls go*.tar.gz`
        tar zxf `ls go*.tar.gz`;  chmod 777 -R go
-       ls -ltr /u01/installs/go
        export GOROOT=/u01/installs;                         echo "GOROOT      : "   $GOROOT
        export GOPATH=$GOROOT/go;                            echo "GOPATH      : "   $GOPATH
        export GOBIN=$GOPATH/bin;                            echo "GOBIN       : "   $GOBIN
        export PATH=$PATH:$GOPATH:$GOBIN;                    echo "PATH        : "   $PATH
                                                             echo ""
-       go version;  go env
+       go version;
 
    - script:
       name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
