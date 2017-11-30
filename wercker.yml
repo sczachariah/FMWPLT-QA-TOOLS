@@ -57,17 +57,17 @@ build:
        export PATH=$PATH:$M2;                 echo "PATH         : "   $PATH;     echo ""
        mvn -version
 
-   - script:
-      name: Download & Install PYTHON dependency to "/u01/installs" directory
-      code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-       tar zxf `ls Python*.tgz`;   mv `tar tzf Python*.tgz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
-       cd /u01/installs/python
-       ./configure --prefix=/u01/installs/python
-       make;  make install
-       export PATH=$PATH:/u01/install/python;  echo "PATH         : "   $PATH;     echo ""
-       python --version
+#   - script:
+#      name: Download & Install PYTHON dependency to "/u01/installs" directory
+#      code: |
+#       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+#       wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+#       tar zxf `ls Python*.tgz`;   mv `tar tzf Python*.tgz | head -1 | cut -f1 -d"/"` python;  chmod 777 -R python
+#       cd /u01/installs/python
+#       ./configure --prefix=/u01/installs/python
+#       make;  make install
+#       export PATH=$PATH:/u01/install/python;  echo "PATH         : "   $PATH;     echo ""
+#       python --version
 
    - script:
       name: Download & Install GIT dependency to "/u01/installs" directory
