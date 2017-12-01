@@ -58,4 +58,5 @@ go version
 echo "--------------------------------------------------------"
 
 touch wait.log
+echo "fmwplt-qa-tools initialized and ready..." >> wait.log
 tail -f wait.log
