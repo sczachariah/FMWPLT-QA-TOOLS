@@ -15,8 +15,7 @@ spec:
     - name: qatools
       imagePullPolicy: IfNotPresent
       image: quay.io/fmwplt/fmwplt-qa-tools:171130
-      command: ["source"]
-      args: ["/u01/installs/setuptools.sh"]
+      command: ["/u01/installs/setuptools.sh"]
       volumeMounts:
       - mountPath: "/u01/installs/"
         name: pv-qatools
