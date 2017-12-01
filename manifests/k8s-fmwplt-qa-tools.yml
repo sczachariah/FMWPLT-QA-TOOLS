@@ -17,7 +17,7 @@ spec:
       image: docker.io/fmwplt/fmwplt-qa-tools:latest
       command: ["/u01/installs/setuptools.sh"]
       volumeMounts:
-      - mountPath: "/u01/installs/"
+      - mountPath: "/u01/mount/"
         name: pv-qatools
 ---
 ---
