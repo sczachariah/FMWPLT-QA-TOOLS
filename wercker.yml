@@ -13,6 +13,7 @@ build:
       sudo yum clean all
       mkdir -p /u01/installs
       mkdir -p /u01/installs/downloads
+      chmod -R 777 /u01/installs
 
    - script:
       name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
