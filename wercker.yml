@@ -11,14 +11,14 @@ build:
       echo "sudo yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel -y"
       sudo yum install wget -y
       sudo yum clean all
-      mkdir -p /u01/installs
-      mkdir -p /u01/installs/downloads
-      chmod -R 777 /u01/installs
+      mkdir -p /u01/qatools
+      mkdir -p /u01/qatools/downloads
+      chmod -R 777 /u01/qatools
 
    - script:
-      name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
+      name: Download & Install JAVA, JRE dependency to "/u01/qatools" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
            $(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
                awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
@@ -31,96 +31,96 @@ build:
            )
        tar zxf `ls jdk*.tar.gz`;  mv `tar tzf jdk*.tar.gz | head -1 | cut -f1 -d"/"` jdk;   chmod 777 -R jdk
        tar zxf `ls jre*.tar.gz`;  mv `tar tzf jre*.tar.gz | head -1 | cut -f1 -d"/"` jre;   chmod 777 -R jre
-       export JAVA_HOME=/u01/installs/jdk;                  echo "JAVA_HOME :"  $JAVA_HOME
-       export JRE_HOME=/u01/installs/jre;                   echo "JRE_HOME  :"  $JRE_HOME
+       export JAVA_HOME=/u01/qatools/jdk;                  echo "JAVA_HOME :"  $JAVA_HOME
+       export JRE_HOME=/u01/qatools/jre;                   echo "JRE_HOME  :"  $JRE_HOME
        export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin;      echo "PATH      :"  $PATH
                                                             echo ""
        java -version
 
    - script:
-      name: Download & Install ANT dependency to "/u01/installs" directory
+      name: Download & Install ANT dependency to "/u01/qatools" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz
        tar zxf `ls apache*.tar.gz`;   mv `tar tzf apache*.tar.gz | head -1 | cut -f1 -d"/"` ant;  chmod 777 -R ant
-       export ANT_HOME=/u01/installs/ant;                   echo "ANT_HOME  : "   $ANT_HOME
+       export ANT_HOME=/u01/qatools/ant;                   echo "ANT_HOME  : "   $ANT_HOME
        export PATH=$PATH:$ANT_HOME/bin;                     echo "PATH      : "   $PATH
                                                             echo ""
        ant -version
 
    - script:
-      name: Download & Install MAVEN dependency to "/u01/installs" directory
+      name: Download & Install MAVEN dependency to "/u01/qatools" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        curl -O https://www.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
        tar zxf `ls apache-maven*.tar.gz`;   mv `tar tzf apache-maven*.tar.gz | head -1 | cut -f1 -d"/"` maven;  chmod 777 -R maven
-       export M2_HOME=/u01/installs/maven;                  echo "M2_HOME      : "   $M2_HOME
-       export M2=/u01/installs/maven/bin;                   echo "M2           : "   $M2
+       export M2_HOME=/u01/qatools/maven;                  echo "M2_HOME      : "   $M2_HOME
+       export M2=/u01/qatools/maven/bin;                   echo "M2           : "   $M2
        export MAVEN_OPTS="-Xms256m -Xmx512m";               echo "MAVEN_OPTS   : "   $MAVEN_OPTS
        export PATH=$PATH:$M2;                               echo "PATH         : "   $PATH
                                                             echo ""
        mvn -version
 
    - script:
-      name: Download & Install PYTHON dependency to "/u01/installs" directory
+      name: Download & Install PYTHON dependency to "/u01/qatools" directory
       code: |
        python --version
 
    - script:
-      name: Download & Install GIT dependency to "/u01/installs" directory
+      name: Download & Install GIT dependency to "/u01/qatools" directory
       code: |
        git --version
 
    - script:
-      name: Download & Install JUNIT dependency to "/u01/installs" directory
+      name: Download & Install JUNIT dependency to "/u01/qatools" directory
       code: |
-       mkdir /u01/installs/junit
-       cd /u01/installs/junit;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       mkdir /u01/qatools/junit
+       cd /u01/qatools/junit;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
        chmod 777 -R junit-4.12.jar
-       export JUNIT_HOME=/u01/installs/junit;                echo "JUNIT_HOME  : "   $JUNIT_HOME
+       export JUNIT_HOME=/u01/qatools/junit;                echo "JUNIT_HOME  : "   $JUNIT_HOME
        export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.12.jar;
 
    - script:
-      name: Download & Install TESTNG dependency to "/u01/installs" directory
+      name: Download & Install TESTNG dependency to "/u01/qatools" directory
       code: |
-       mkdir /u01/installs/testng
-       cd /u01/installs/testng;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       mkdir /u01/qatools/testng
+       cd /u01/qatools/testng;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget http://repo1.maven.org/maven2/org/testng/testng/6.8.5/testng-6.8.5.jar
        chmod 777 -R testng-6.8.5.jar
-       export TESTNG_HOME=/u01/installs/testng;             echo "TESTNG_HOME   : "   $TESTNG_HOME
+       export TESTNG_HOME=/u01/qatools/testng;             echo "TESTNG_HOME   : "   $TESTNG_HOME
        export CLASSPATH=$CLASSPATH:$TESTNG_HOME/testng-6.8.5.jar;
 
    - script:
-      name: Download & Install GRADLE dependency to "/u01/installs" directory
+      name: Download & Install GRADLE dependency to "/u01/qatools" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget https://services.gradle.org/distributions/gradle-3.1-bin.zip
        unzip -q gradle-3.1-bin.zip;   mv gradle-3.1 gradle;   chmod 777 -R gradle
-       export GRADLE_HOME=/u01/installs/gradle;             echo "GRADLE_HOME  : "   $GRADLE_HOME
+       export GRADLE_HOME=/u01/qatools/gradle;             echo "GRADLE_HOME  : "   $GRADLE_HOME
        export PATH=$PATH:$GRADLE_HOME/bin;                  echo "PATH         : "   $PATH
                                                             echo ""
        gradle -v
 
    - script:
-      name: Download & Install GROOVY dependency to "/u01/installs" directory
+      name: Download & Install GROOVY dependency to "/u01/qatools" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget  https://bintray.com/artifact/download/groovy/maven/apache-groovy-binary-2.4.8.zip
        unzip -q apache-groovy-binary-2.4.8.zip;   mv groovy-2.4.8 groovy;   chmod 777 -R groovy
-       export GROOVY_HOME=/u01/installs/groovy;             echo "GROOVY_HOME  : "   $GROOVY_HOME
+       export GROOVY_HOME=/u01/qatools/groovy;             echo "GROOVY_HOME  : "   $GROOVY_HOME
        export PATH=$PATH:$GROOVY_HOME/bin;                  echo "PATH         : "   $PATH
                                                             echo ""
        groovy -version
 
    - script:
-      name: Download & Install GO dependency to "/u01/installs" directory
+      name: Download & Install GO dependency to "/u01/qatools" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
        wget https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
        sha256sum `ls go*.tar.gz`
        tar zxf `ls go*.tar.gz`;  chmod 777 -R go
-       export GOROOT=/u01/installs;                         echo "GOROOT      : "   $GOROOT
+       export GOROOT=/u01/qatools;                         echo "GOROOT      : "   $GOROOT
        export GOPATH=$GOROOT/go;                            echo "GOPATH      : "   $GOPATH
        export GOBIN=$GOPATH/bin;                            echo "GOBIN       : "   $GOBIN
        export PATH=$PATH:$GOPATH:$GOBIN;                    echo "PATH        : "   $PATH
@@ -128,17 +128,19 @@ build:
        go version;
 
    - script:
-      name: Copy downloaded resources for installation to "/u01/installs/downloads" directory
+      name: Copy downloaded resources for installation to "/u01/qatools/downloads" directory
       code: |
-       cd /u01/installs;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
-       mv *.t*z /u01/installs/downloads;  mv *.zip /u01/installs/downloads;
-       cp /u01/installs/junit/junit*.jar /u01/installs/downloads; cp /u01/installs/testng/testng*.jar /u01/installs/downloads
-       chmod 777 -R /u01/installs/downloads
+       cd /u01/qatools;  echo "";  echo "Current working directory is :" `pwd`;  echo ""
+       mv *.t*z /u01/qatools/downloads;  mv *.zip /u01/qatools/downloads;
+       cp /u01/qatools/junit/junit*.jar /u01/qatools/downloads; cp /u01/qatools/testng/testng*.jar /u01/qatools/downloads
+       chmod 777 -R /u01/qatools/downloads
 
-       cp -r $WERCKER_SOURCE_DIR/setuptools.sh /u01/installs/
-       chmod -R 777 /u01/installs/setuptools.sh
+       mkdir -p /u01/scripts
+       cp -r $WERCKER_SOURCE_DIR/scripts/setuptools.sh /u01/scripts/
+       chmod -R 777 /u01/scripts
 
-       cp -r /u01/installs/ $WERCKER_OUTPUT_DIR/
+       cp -r /u01/qatools/ $WERCKER_OUTPUT_DIR/
+       cp -r /u01/scripts/ $WERCKER_OUTPUT_DIR/
        cp -r $WERCKER_SOURCE_DIR/ $WERCKER_OUTPUT_DIR/
 
        export WERCKER_BUILDVERSION=`date +"%m%d%H%M"`
@@ -149,4 +151,4 @@ build:
       password: $DOCKER_IO_PASSWORD
       repository: docker.io/fmwplt/fmwplt-qa-tools
       tag: $WERCKER_BUILDVERSION, latest
-      working-dir: /u01/installs/
+      working-dir: /u01/qatools
