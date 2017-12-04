@@ -143,9 +143,6 @@ build:
 
        export WERCKER_BUILDVERSION=`date +"%m%d%H%M"`
 
-   - bash-template:
-      name: templating files
-
    - internal/docker-push:
       name: Push the third party dependency containing image to repository
       username: $DOCKER_IO_USERNAME
