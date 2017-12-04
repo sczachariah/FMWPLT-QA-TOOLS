@@ -7,10 +7,9 @@ build:
      name: Install Required Packages for downloading dependencies
      code: |
       sudo yum groups install "Development Tools" -y
-      sudo yum install gcc perl-ExtUtils-MakeMaker -y
-      echo "sudo yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel -y"
       sudo yum install wget -y
       sudo yum clean all
+
       mkdir -p /u01/qatools
       mkdir -p /u01/qatools/downloads
       chmod -R 777 /u01/qatools
