@@ -57,4 +57,9 @@ echo "--------------------------------------------------------"
 go version
 echo "--------------------------------------------------------"
 
-sleep infinity
+mkdir -p /u01/mount/qatools
+cp -r /u01/installs/. /u01/mount/qatools
+
+touch wait.log
+echo "fmwplt-qa-tools initialized and ready..." >> wait.log
+tail -f wait.log

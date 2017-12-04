@@ -13,6 +13,7 @@ build:
       sudo yum clean all
       mkdir -p /u01/installs
       mkdir -p /u01/installs/downloads
+      chmod -R 777 /u01/installs
 
    - script:
       name: Download & Install JAVA, JRE dependency to "/u01/installs" directory
@@ -147,9 +148,8 @@ build:
 
    - internal/docker-push:
       name: Push the third party dependency containing image to repository
-      username: $QUAY_IO_USERNAME
-      password: $QUAY_IO_PASSWORD
-      repository: quay.io/fmwplt/fmwplt-qa-tools
+      username: $DOCKER_IO_USERNAME
+      password: $DOCKER_IO_PASSWORD
+      repository: docker.io/fmwplt/fmwplt-qa-tools
       tag: $WERCKER_BUILDVERSION, latest
       working-dir: /u01/installs/
-      registry: https://quay.io
