@@ -59,6 +59,7 @@ echo "--------------------------------------------------------"
 
 cp -r /u01/qatools /shared/
 
+cd /u01
 touch wait.log
 echo "fmwplt-qa-tools initialized and ready..." >> wait.log
 tail -f wait.log
