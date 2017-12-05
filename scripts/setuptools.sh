@@ -57,7 +57,7 @@ echo "--------------------------------------------------------"
 go version
 echo "--------------------------------------------------------"
 
-cp -r /u01/qatools /u01/mount/
+cp -r /u01/qatools /shared/
 
 touch wait.log
 echo "fmwplt-qa-tools initialized and ready..." >> wait.log
