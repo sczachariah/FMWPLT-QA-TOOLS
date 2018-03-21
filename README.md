@@ -1,1 +1,2 @@
-This repository generates fmwplt-qa-tools image using wercker
+This repository generates fmwplt-qa-tools image using wercker.
+
